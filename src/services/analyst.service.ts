@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UUID } from 'crypto';
-import {
-  AnalystInterface,
-  CreateAnalystInterface,
-} from 'src/interfaces/analyst.interface';
+import { AnalystInterface } from 'src/interfaces/analyst.interface';
+import { CreateAnalystDto } from 'src/validators/createAnalyst.dto';
 
 @Injectable()
 export class AnalystService {
@@ -29,7 +27,7 @@ export class AnalystService {
     };
   }
 
-  createAnalyst(analyst: CreateAnalystInterface) {
+  createAnalyst(analyst: CreateAnalystDto) {
     console.log('analyst criado!', { analyst });
   }
 

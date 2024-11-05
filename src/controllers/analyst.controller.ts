@@ -9,11 +9,10 @@ import {
   Put,
 } from '@nestjs/common';
 import { AnalystService } from '../services/analyst.service';
-import {
-  AnalystInterface,
-  CreateAnalystInterface,
-} from '../interfaces/analyst.interface';
+import { AnalystInterface } from '../interfaces/analyst.interface';
 import { UUID } from 'crypto';
+import { ValidationPipe } from 'src/validators/validation.pipe';
+import { CreateAnalystDto } from 'src/validators/createAnalyst.dto';
 
 @Controller('analyst-service')
 export class AnalystController {
@@ -26,8 +25,10 @@ export class AnalystController {
 
   @Post()
   @HttpCode(201)
-  createAnalyst(@Body() body: CreateAnalystInterface): void {
-    this.analystService.createAnalyst(body);
+  createAnalyst(
+    @Body(new ValidationPipe()) createAnalystDto: CreateAnalystDto,
+  ) {
+    this.analystService.createAnalyst(createAnalystDto);
   }
 
   @Put(':id')
