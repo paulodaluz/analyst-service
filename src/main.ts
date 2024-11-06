@@ -10,6 +10,8 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('analyst-service/v1');
+
   const config = new DocumentBuilder()
     .setTitle('Analyst API')
     .setDescription('API for managing analysts')
@@ -18,8 +20,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-
-  app.setGlobalPrefix('analyst-service/v1');
 
   await app.listen(port, host, () =>
     Logger.log(`Server running on port ${port}`),
