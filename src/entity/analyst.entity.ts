@@ -1,15 +1,15 @@
-import { Type } from 'class-transformer';
 import {
-  IsString,
-  IsObject,
   IsDefined,
   IsNotEmptyObject,
+  IsObject,
+  IsString,
   ValidateNested,
 } from 'class-validator';
-import { ContactDataDto } from './contactAnalyst.dto';
-import { AddressDto } from './adressAnalyst.dto';
+import { AddressDto } from 'src/validators/adressAnalyst.dto';
+import { Type } from 'class-transformer';
+import { ContactDataDto } from 'src/validators/contactAnalyst.dto';
 
-export class CreateAnalystDto {
+export class AnalystEntity {
   @IsDefined()
   @IsString()
   fullname: string;

@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { UUID } from 'crypto';
 import { AnalystInterface } from 'src/interfaces/analyst.interface';
 import { CreateAnalystDto } from 'src/validators/createAnalyst.dto';
 
 @Injectable()
 export class AnalystService {
-  getAnalyst(id: UUID): AnalystInterface {
+  getAnalyst(id): AnalystInterface {
     return {
       id,
       fullname: 'Paulo da Luz',
@@ -31,11 +30,11 @@ export class AnalystService {
     console.log('analyst criado!', { analyst });
   }
 
-  updateAnalyst(id: UUID, analyst: AnalystInterface) {
+  updateAnalyst(id, analyst) {
     console.log('analyst atualizado!', { id, analyst });
   }
 
-  deleteAnalyst(id: UUID) {
+  deleteAnalyst(id) {
     console.log('analyst deletado!', { id });
   }
 }
