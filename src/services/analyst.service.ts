@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AnalystInterface } from 'src/interfaces/analyst.interface';
-import { CreateAnalystDto } from 'src/validators/createAnalyst.dto';
+import { AnalystInterface } from '../interfaces/analyst.interface';
+import { CreateAnalystDto } from '../validators/createAnalyst.dto';
 
 @Injectable()
 export class AnalystService {

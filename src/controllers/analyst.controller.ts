@@ -15,9 +15,9 @@ import { CreateAnalystDto } from '../validators/createAnalyst.dto';
 import { InputAnalystIdDto } from '../validators/inputAnalystId.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AnalystEntity } from '../entity/analyst.entity';
-import { UpdateAnalystAnalystDto } from 'src/validators/updateAnalyst.dto';
+import { UpdateAnalystAnalystDto } from '../validators/updateAnalyst.dto';
 
-@Controller('analyst-service/v1/users')
+@Controller('users')
 export class AnalystController {
   constructor(private readonly analystService: AnalystService) {}
 

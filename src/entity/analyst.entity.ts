@@ -5,9 +5,9 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { AddressDto } from 'src/validators/adressAnalyst.dto';
+import { AddressDto } from '../validators/adressAnalyst.dto';
 import { Type } from 'class-transformer';
-import { ContactDataDto } from 'src/validators/contactAnalyst.dto';
+import { ContactDataDto } from '../validators/contactAnalyst.dto';
 
 export class AnalystEntity {
   @IsDefined()
