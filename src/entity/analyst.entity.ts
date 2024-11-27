@@ -38,5 +38,5 @@ export class AnalystEntity {
   @IsObject()
   @ValidateNested()
   @Type(() => ContactDataDto)
-  contactPreference: AddressDto;
+  contact: ContactDataDto;
 }

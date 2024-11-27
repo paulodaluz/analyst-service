@@ -45,5 +45,5 @@ export class UpdateAnalystAnalystDto {
   @IsObject()
   @ValidateNested()
   @Type(() => ContactDataDto)
-  contactPreference: AddressDto;
+  contact: ContactDataDto;
 }

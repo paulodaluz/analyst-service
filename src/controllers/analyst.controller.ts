@@ -42,10 +42,10 @@ export class AnalystController {
     status: 201,
     description: 'Create one analyst.',
   })
-  createAnalyst(
+  async createAnalyst(
     @Body(new ValidationPipe()) createAnalystDto: CreateAnalystDto,
   ) {
-    this.analystService.createAnalyst(createAnalystDto);
+    await this.analystService.createAnalyst(createAnalystDto);
   }
 
   @Put(':id')
