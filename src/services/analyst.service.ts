@@ -1,9 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { AnalystInterface } from '../interfaces/analyst.interface';
 import { CreateAnalystDto } from '../validators/createAnalyst.dto';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AnalystService {
+  constructor(
+    @Inject('ANALYST_MODEL')
+    private analystModel: Model<AnalystInterface>,
+  ) {}
+
   getAnalyst(id): AnalystInterface {
     return {
       id,
@@ -18,7 +24,7 @@ export class AnalystService {
         state: 'RS',
         postalCode: '29931-140',
       },
-      contactPreference: {
+      contact: {
         phone: '54991083039',
         email: 'rm353710@fiap.com.br',
         contactPreference: 'email',
@@ -26,8 +32,11 @@ export class AnalystService {
     };
   }
 
-  createAnalyst(analyst: CreateAnalystDto) {
+  async createAnalyst(analyst: CreateAnalystDto) {
+    const createdAnalyst = new this.analystModel(analyst);
     console.log('analyst criado!', { analyst });
+    const bola = await createdAnalyst.save();
+    return bola;
   }
 
   updateAnalyst(id, analyst) {

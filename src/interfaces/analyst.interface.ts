@@ -6,7 +6,7 @@ export interface CreateAnalystInterface {
   documentNumber: string;
   gender: string;
   adress: AddressInterface;
-  contactPreference: ContactDataInterface;
+  contact: ContactDataInterface;
 }
 
 export interface AnalystInterface {
@@ -16,7 +16,7 @@ export interface AnalystInterface {
   documentNumber: string;
   gender: string;
   adress: AddressInterface;
-  contactPreference: ContactDataInterface;
+  contact: ContactDataInterface;
 }
 
 export interface AddressInterface {
