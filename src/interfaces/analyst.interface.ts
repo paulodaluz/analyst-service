@@ -1,5 +1,3 @@
-import { UUID } from 'crypto';
-
 export interface CreateAnalystInterface {
   fullname: string;
   birthDay: string;
@@ -10,7 +8,7 @@ export interface CreateAnalystInterface {
 }
 
 export interface AnalystInterface {
-  id: UUID;
+  id: string;
   fullname: string;
   birthDay: string;
   documentNumber: string;

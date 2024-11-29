@@ -1,49 +1,49 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, Logger } from '@nestjs/common';
 import { AnalystInterface } from '../interfaces/analyst.interface';
 import { CreateAnalystDto } from '../validators/createAnalyst.dto';
 import { Model } from 'mongoose';
+import { ErrorUtils } from 'src/utils/errors.utils';
 
 @Injectable()
 export class AnalystService {
+  private className = 'AnalystService';
+
   constructor(
     @Inject('ANALYST_MODEL')
     private analystModel: Model<AnalystInterface>,
   ) {}
 
-  getAnalyst(id): AnalystInterface {
-    return {
-      id,
-      fullname: 'Paulo da Luz',
-      birthDay: '25/11/2000',
-      documentNumber: '146.434.650-00',
-      gender: 'male',
-      adress: {
-        street: 'Morom',
-        number: 2584,
-        city: 'Porto Alegre',
-        state: 'RS',
-        postalCode: '29931-140',
-      },
-      contact: {
-        phone: '54991083039',
-        email: 'rm353710@fiap.com.br',
-        contactPreference: 'email',
-      },
-    };
+  async getAnalyst(id: string): Promise<AnalystInterface> {
+    const analyst = await this.analystModel.findById(id);
+
+    if (analyst?.id) return analyst;
+
+    return ErrorUtils.throwSpecificError(404);
   }
 
   async createAnalyst(analyst: CreateAnalystDto) {
     const createdAnalyst = new this.analystModel(analyst);
-    console.log('analyst criado!', { analyst });
-    const bola = await createdAnalyst.save();
-    return bola;
+
+    return await createdAnalyst.save();
   }
 
   updateAnalyst(id, analyst) {
     console.log('analyst atualizado!', { id, analyst });
   }
 
-  deleteAnalyst(id) {
-    console.log('analyst deletado!', { id });
+  async deleteAnalyst(id: string) {
+    try {
+      const analyst = await this.analystModel.findById(id);
+
+      if (analyst?.id) return await this.analystModel.deleteOne({ _id: id });
+    } catch (error) {
+      Logger.error(
+        `analyst.id = ${id} - error = ${error}`,
+        '',
+        `${this.className} - ${this.deleteAnalyst.name}`,
+      );
+    }
+
+    return ErrorUtils.throwSpecificError(400);
   }
 }

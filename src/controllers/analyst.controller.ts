@@ -29,10 +29,10 @@ export class AnalystController {
     type: AnalystEntity,
   })
   @ApiResponse({ status: 404, description: 'Analyst not found.' })
-  getAnalyst(
+  async getAnalyst(
     @Param(new ValidationPipe()) inputAnalystIdDto: InputAnalystIdDto,
-  ): AnalystInterface {
-    return this.analystService.getAnalyst(inputAnalystIdDto);
+  ): Promise<AnalystInterface> {
+    return await this.analystService.getAnalyst(inputAnalystIdDto.id);
   }
 
   @Post()
@@ -67,9 +67,9 @@ export class AnalystController {
   @ApiOperation({ summary: 'Delete Analyst' })
   @ApiResponse({ status: 200, description: 'Analyst deleted successfully.' })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
-  deleteAnalyst(
+  async deleteAnalyst(
     @Param(new ValidationPipe()) inputAnalystIdDto: InputAnalystIdDto,
-  ): void {
-    return this.analystService.deleteAnalyst(inputAnalystIdDto);
+  ): Promise<void> {
+    await this.analystService.deleteAnalyst(inputAnalystIdDto.id);
   }
 }
