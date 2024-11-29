@@ -3,6 +3,7 @@ import {
   IsNotEmptyObject,
   IsObject,
   IsString,
+  IsUUID,
   ValidateNested,
 } from 'class-validator';
 import { AddressDto } from '../validators/adressAnalyst.dto';
@@ -10,6 +11,10 @@ import { Type } from 'class-transformer';
 import { ContactDataDto } from '../validators/contactAnalyst.dto';
 
 export class AnalystEntity {
+  @IsUUID()
+  @IsString()
+  _id: string;
+
   @IsDefined()
   @IsString()
   fullname: string;
