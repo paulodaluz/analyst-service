@@ -52,13 +52,13 @@ export class AnalystController {
   @ApiOperation({ summary: 'Update an analyst' })
   @ApiResponse({ status: 200, description: 'Analyst updated successfully.' })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
-  updateAnalyst(
+  async updateAnalyst(
     @Param(new ValidationPipe()) inputAnalystIdDto: InputAnalystIdDto,
     @Body(new ValidationPipe())
     updateAnalystAnalystDto: UpdateAnalystAnalystDto,
-  ): void {
-    this.analystService.updateAnalyst(
-      inputAnalystIdDto,
+  ): Promise<void> {
+    await this.analystService.updateAnalyst(
+      inputAnalystIdDto.id,
       updateAnalystAnalystDto,
     );
   }

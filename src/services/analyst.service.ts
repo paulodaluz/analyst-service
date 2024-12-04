@@ -27,8 +27,32 @@ export class AnalystService {
     return await createdAnalyst.save();
   }
 
-  updateAnalyst(id, analyst) {
-    console.log('analyst atualizado!', { id, analyst });
+  async updateAnalyst(uuid: string, analyst) {
+    Logger.log(
+      `uuid = ${uuid}`,
+      `${this.className} - ${this.updateAnalyst.name}`,
+    );
+
+    if (analyst.uuid) {
+      Reflect.deleteProperty(analyst, 'uuid');
+    }
+
+    if (!Object.values(analyst).length) {
+      ErrorUtils.throwSpecificError(400);
+    }
+
+    const analysExist: any = await this.analystModel.findById(uuid);
+
+    if (!analysExist || !analysExist.id) {
+      Logger.error(
+        `uuid = ${uuid} - ERROR = User not found`,
+        `${this.className} - ${this.updateAnalyst.name}`,
+      );
+
+      ErrorUtils.throwSpecificError(404);
+    }
+
+    await this.analystModel.findOneAndUpdate({ _id: uuid }, analyst);
   }
 
   async deleteAnalyst(id: string) {
