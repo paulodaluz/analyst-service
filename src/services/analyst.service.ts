@@ -46,7 +46,7 @@ export class AnalystService {
         `${this.className} - ${this.updateAnalyst.name}`,
       );
 
-      ErrorUtils.throwSpecificError(404);
+      return ErrorUtils.throwSpecificError(404);
     }
 
     return await this.analystRepository.updateAnalyst(uuid, analyst);
