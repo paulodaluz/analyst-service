@@ -60,7 +60,7 @@ export class AnalystController {
     @Body(new ValidationPipe())
     updateAnalystAnalystDto: UpdateAnalystAnalystDto,
   ): Promise<void> {
-    await this.analystService.updateAnalyst(
+    return await this.analystService.updateAnalyst(
       inputAnalystIdDto.id,
       updateAnalystAnalystDto,
     );
@@ -74,5 +74,7 @@ export class AnalystController {
     @Param(new ValidationPipe()) inputAnalystIdDto: InputAnalystIdDto,
   ): Promise<void> {
     await this.analystService.deleteAnalyst(inputAnalystIdDto.id);
+
+    return;
   }
 }
