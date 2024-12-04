@@ -5,7 +5,7 @@ import { AppModule } from '../../../src/app.module';
 import MockData from '../../mock/analyst.mock';
 import { AnalystService } from '../../../src/services/analyst.service';
 
-describe('UserController test', () => {
+describe('AnalystController test', () => {
   let app: INestApplication;
   let analystService: AnalystService;
 
@@ -62,7 +62,7 @@ describe('UserController test', () => {
           contactPreference: 'email',
         },
       })
-      .expect(201);
+      .expect(200);
   });
 
   it('/POST createAnalyst with missing parameters', async () => {

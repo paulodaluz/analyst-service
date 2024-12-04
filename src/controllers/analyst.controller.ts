@@ -16,6 +16,7 @@ import { InputAnalystIdDto } from '../validators/inputAnalystId.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AnalystEntity } from '../entity/analyst.entity';
 import { UpdateAnalystAnalystDto } from '../validators/updateAnalyst.dto';
+import { CreateAnalystReponse } from '../entity/createAnalystResponse.entity';
 
 @Controller('users')
 export class AnalystController {
@@ -36,16 +37,18 @@ export class AnalystController {
   }
 
   @Post()
-  @HttpCode(201)
+  @HttpCode(200)
   @ApiOperation({ summary: 'Create one Analyst' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Create one analyst.',
+    type: CreateAnalystReponse,
   })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
   async createAnalyst(
     @Body(new ValidationPipe()) createAnalystDto: CreateAnalystDto,
   ) {
-    await this.analystService.createAnalyst(createAnalystDto);
+    return await this.analystService.createAnalyst(createAnalystDto);
   }
 
   @Put(':id')

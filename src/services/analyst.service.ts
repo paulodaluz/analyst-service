@@ -1,30 +1,33 @@
-import { Injectable, Inject, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { AnalystInterface } from '../interfaces/analyst.interface';
 import { CreateAnalystDto } from '../validators/createAnalyst.dto';
-import { Model } from 'mongoose';
+
 import { ErrorUtils } from '../utils/errors.utils';
+import { AnalystRepository } from '../repository/analyst.repository';
 
 @Injectable()
 export class AnalystService {
   private className = 'AnalystService';
 
-  constructor(
-    @Inject('ANALYST_MODEL')
-    private analystModel: Model<AnalystInterface>,
-  ) {}
+  constructor(private readonly analystRepository: AnalystRepository) {}
 
   async getAnalyst(id: string): Promise<AnalystInterface> {
-    const analyst = await this.analystModel.findById(id);
+    const analyst = await this.analystRepository.getAnalyst(id);
 
-    if (analyst?.id) return analyst;
+    if (analyst?._id) {
+      analyst.uuid = analyst._id;
 
+      delete analyst._id;
+      Reflect.deleteProperty(analyst, '_id');
+      Reflect.deleteProperty(analyst, '__v');
+
+      return analyst;
+    }
     return ErrorUtils.throwSpecificError(404);
   }
 
   async createAnalyst(analyst: CreateAnalystDto) {
-    const createdAnalyst = new this.analystModel(analyst);
-
-    return await createdAnalyst.save();
+    return await this.analystRepository.createAnalyst(analyst);
   }
 
   async updateAnalyst(uuid: string, analyst) {
@@ -41,9 +44,9 @@ export class AnalystService {
       ErrorUtils.throwSpecificError(400);
     }
 
-    const analysExist: any = await this.analystModel.findById(uuid);
+    const analystExist = await this.analystRepository.getAnalyst(uuid);
 
-    if (!analysExist || !analysExist.id) {
+    if (!analystExist || !analystExist._id) {
       Logger.error(
         `uuid = ${uuid} - ERROR = User not found`,
         `${this.className} - ${this.updateAnalyst.name}`,
@@ -52,22 +55,24 @@ export class AnalystService {
       ErrorUtils.throwSpecificError(404);
     }
 
-    await this.analystModel.findOneAndUpdate({ _id: uuid }, analyst);
+    return await this.analystRepository.updateAnalyst(uuid, analyst);
   }
 
-  async deleteAnalyst(id: string) {
+  async deleteAnalyst(uuid: string) {
     try {
-      const analyst = await this.analystModel.findById(id);
+      const analyst = await this.analystRepository.getAnalyst(uuid);
 
-      if (analyst?.id) return await this.analystModel.deleteOne({ _id: id });
+      if (analyst?._id) return await this.analystRepository.deleteAnalyst(uuid);
     } catch (error) {
       Logger.error(
-        `analyst.id = ${id} - error = ${error}`,
+        `analyst.id = ${uuid} - error = ${error}`,
         '',
         `${this.className} - ${this.deleteAnalyst.name}`,
       );
+
+      return ErrorUtils.throwSpecificError(400);
     }
 
-    return ErrorUtils.throwSpecificError(400);
+    return ErrorUtils.throwSpecificError(404);
   }
 }
