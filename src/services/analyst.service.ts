@@ -15,12 +15,6 @@ export class AnalystService {
     const analyst = await this.analystRepository.getAnalyst(id);
 
     if (analyst?._id) {
-      analyst.uuid = analyst._id;
-
-      delete analyst._id;
-      Reflect.deleteProperty(analyst, '_id');
-      Reflect.deleteProperty(analyst, '__v');
-
       return analyst;
     }
     return ErrorUtils.throwSpecificError(404);
