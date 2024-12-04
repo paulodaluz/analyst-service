@@ -2,7 +2,7 @@ import { Injectable, Inject, Logger } from '@nestjs/common';
 import { AnalystInterface } from '../interfaces/analyst.interface';
 import { CreateAnalystDto } from '../validators/createAnalyst.dto';
 import { Model } from 'mongoose';
-import { ErrorUtils } from 'src/utils/errors.utils';
+import { ErrorUtils } from '../utils/errors.utils';
 
 @Injectable()
 export class AnalystService {
