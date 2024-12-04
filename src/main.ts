@@ -5,7 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import pjson from '../package.json';
 
 async function bootstrap() {
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3001;
   const host = process.env.HOST || '0.0.0.0';
 
   const app = await NestFactory.create(AppModule);
