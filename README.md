@@ -21,6 +21,13 @@ Para startar o projeto você pode digitar o comando `npm run start:dev` ou `yarn
 
 Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apenas entrar em `localhost:3000/analyst-service/v1/ROTA_DESEJADA`.
 
+
+## 🐋 Getting started with Docker
+Para buildar o projeto você pode digitar o comando `docker build -t analyst-service .` no diretório do projeto. Para inciar o container basta executar o comando `docker run -p 3000:3000 -d analyst-service`.
+
+Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apenas entrar em `localhost:3000/analyst-service/v1/ROTA_DESEJADA`.
+
+
 Segue os CURL´s:
 
 ### Create Analyst
