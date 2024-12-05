@@ -28,7 +28,8 @@ Para buildar o projeto você pode digitar o comando `docker build -t analyst-ser
 Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apenas entrar em `localhost:3000/analyst-service/v1/ROTA_DESEJADA`.
 
 
-Segue os CURL´s:
+
+## Segue os CURL´s:
 
 ### Create Analyst
 `curl --location 'localhost:3000/analyst-service/v1/users' \
