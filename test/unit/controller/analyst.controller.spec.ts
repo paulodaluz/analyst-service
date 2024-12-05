@@ -4,6 +4,7 @@ import request from 'supertest';
 import { AppModule } from '../../../src/app.module';
 import MockData from '../../mock/analyst.mock';
 import { AnalystService } from '../../../src/services/analyst.service';
+import mongoose from 'mongoose';
 
 describe('AnalystController test', () => {
   let app: INestApplication;
