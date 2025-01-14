@@ -3,35 +3,36 @@
 A NodeJS backend application for save analyst register.
 
 ## 🧪 Tecnologias
+
 As principais tecnologias utilizadas foram:
+
 - [NodeJS](https://nodejs.org/en/)
 - [NestJS](https://docs.nestjs.com/)
 - [Typescript](https://www.typescriptlang.org/docs/)
 - [MongoDB](https://www.mongodb.com)
 
-
 ## 🛠️ Configurando o ambiente
- - Use a versão 22.11.0 do nodeJS
- - Clone o repositório
- - Instale as dependências com `npm install` ou `yarn install`
 
+- Use a versão 22.11.0 do nodeJS
+- Clone o repositório
+- Instale as dependências com `npm install` ou `yarn install`
 
 ## 🚀 Getting started
+
 Para startar o projeto você pode digitar o comando `npm run start:dev` ou `yarn start:dev` no diretório do projeto.
 
 Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apenas entrar em `localhost:3000/analyst-service/v1/ROTA_DESEJADA`.
 
-
 ## 🐋 Getting started with Docker
+
 Para buildar o projeto você pode digitar o comando `docker build -t analyst-service .` no diretório do projeto. Para inciar o container basta executar o comando `docker run -p 3000:3000 -d analyst-service`.
 
 Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apenas entrar em `localhost:3000/analyst-service/v1/ROTA_DESEJADA`.
 
-
-
 ## Segue os CURL´s:
 
 ### Create Analyst
+
 `curl --location 'localhost:3000/analyst-service/v1/users' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -54,9 +55,11 @@ Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apena
 }'`
 
 ### GET Analyst
+
 `curl --location 'localhost:3000/analyst-service/v1/users/998bcf68-cbfa-40f7-b5c1-0693c3dd90fb'`
 
 ### Update Analyst
+
 `curl --location --request PUT 'localhost:3000/analyst-service/v1/users/5de67719-1da8-4857-96e8-630556dd3128' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -64,7 +67,7 @@ Após isso ele irá abrir na porta `3000` no seu localhost, ou seja, basta apena
 }'`
 
 ### Delete Analyst
-`curl --location --request DELETE 'localhost:3000/analyst-service/v1/users/5de67719-1da8-4857-96e8-630556dd3128'`
 
+`curl --location --request DELETE 'localhost:3000/analyst-service/v1/users/5de67719-1da8-4857-96e8-630556dd3128'`
 
 <p align="center">Made by Paulo da Luz</p>
